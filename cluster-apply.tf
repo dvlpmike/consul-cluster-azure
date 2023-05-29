@@ -5,10 +5,10 @@ variable "name" {
 
 terraform {
   backend "azurerm" {
-    resource_group_name  = "rg-${var.name}"
-    storage_account_name = "sa-${var.name}"
-    container_name       = "container-${var.name}"
-    key                  = "${var.name}.tfstate"
+    resource_group_name  = "rg-consul-cluster"
+    storage_account_name = "sa-consul-cluster"
+    container_name       = "container-consul-cluster"
+    key                  = "consul-cluster.tfstate"
   }
 }
 
