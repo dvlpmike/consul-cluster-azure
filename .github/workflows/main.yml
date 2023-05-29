@@ -4,7 +4,8 @@ on:
     branches:
       - change-structure
     paths-ignore:
-      - "**.md" 
+      - "**.md"
+  workflow_dispatch:
 
 permissions:
   id-token: write
@@ -44,4 +45,5 @@ jobs:
         run: terraform plan -input=false
 
       - name: Terraform Apply
+        if: github.events_name == 'workflow_dispatch'
         run: terraform apply -auto-approve -input=false
