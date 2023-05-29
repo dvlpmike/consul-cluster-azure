@@ -19,7 +19,7 @@ provider "azurerm" {
 
 data "azurerm_client_config" "current" {}
 
-resource "azurerm_resource_group" "$${var.name}" {
+resource "azurerm_resource_group" "consul-cluster" {
   name     = "rg-${var.name}"
   location = "West Europe"
 }
