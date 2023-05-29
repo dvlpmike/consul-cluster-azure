@@ -1,19 +1,19 @@
 # Terraform Consul Cluster on Azure
-![Architecture](Img/architecture.jpg)
+![Architecture](img/architecture.jpg)
 ## Prerequisites
 Run below commands on Azure:
 ```sh
 # Create resource group
-az group create -n terraform-consul-azure -l westeurope
+az group create -n rg-consul-cluster -l westeurope
 
 # Crete storage account
-az storage account create -n tcasa -g terraform-consul-azure -l westeurope --sku Standard_LRS
+az storage account create -n saconsulcluster -g rg-consul-cluster -l westeurope --sku Standard_LRS
 
 # Create container
-az storage container create --account-name tcasa -n tcatfstate
+az storage container create --account-name saconsulcluster -n container-consul-cluster
 
 # Create Service Principal 
-az ad sp create-for-rbac --name tcasp
+az ad sp create-for-rbac --name dvlpmike-consul-cluster
 
 # Add role for app
 az role assignment create --assignee <service-principal-id> --role "Contributor"
