@@ -1,8 +1,3 @@
-variable "name" {
-  type = string
-  default = "consul-cluster"
-} 
-
 terraform {
   backend "azurerm" {
     resource_group_name  = "rg-consul-cluster"
@@ -12,6 +7,11 @@ terraform {
   }
 }
 
+variable "name" {
+  type = string
+  default = "consul-cluster1"
+} 
+
 provider "azurerm" {
   features {}
   use_oidc = true
@@ -19,7 +19,7 @@ provider "azurerm" {
 
 data "azurerm_client_config" "current" {}
 
-resource "azurerm_resource_group" "consul-cluster" {
+resource "azurerm_resource_group" "consul-cluster1" {
   name     = "rg-${var.name}"
   location = "West Europe"
 }
