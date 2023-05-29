@@ -1,3 +1,3 @@
 module "apply" {
-  source = "tf/main.tf"
+  source = "tf/cluster-apply.tf"
 }
