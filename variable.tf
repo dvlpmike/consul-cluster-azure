@@ -5,7 +5,7 @@ variable "name" {
 
 variable "rg" {
   type = string
-  default = "rg-${var.name}"
+  default = "rg-consul-cluster1"
 }
 
 variable "location" {
