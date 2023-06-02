@@ -13,3 +13,6 @@ variable "location" {
   default = "West Europe"
 }
 
+variable "public_key" {}
+
+variable "ssh_user" {}
