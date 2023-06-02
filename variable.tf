@@ -10,7 +10,7 @@ variable "rg" {
 
 variable "location" {
   type = string
-  default = "us-central"
+  default = "centralus"
 }
 
 variable "public_key" {}
