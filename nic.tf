@@ -1,5 +1,6 @@
 resource "azurerm_network_interface" "consul-cluster1" {
-  name                = "nic-${var.name}"
+  count               = 3
+  name                = "nic-${var.name}${count.index}"
   location            = "${var.location}"
   resource_group_name = "${var.rg}"
 
