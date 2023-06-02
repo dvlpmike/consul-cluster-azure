@@ -43,10 +43,10 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan -input=false
-        env:
-          TF_VAR_public_key: ${{ secrets.AZURE_PUBLIC_KEY }}
-          TF_VAR_ssh_user: ${{ secrets.AZURE_SSH_USER }}
 
       - name: Terraform Apply
         #if: github.event_name == 'workflow_dispatch'
         run: terraform apply -auto-approve -input=false
+        env:
+          TF_VAR_public_key: ${{ secrets.AZURE_PUBLIC_KEY }}
+          TF_VAR_ssh_user: ${{ secrets.AZURE_SSH_USER }}
