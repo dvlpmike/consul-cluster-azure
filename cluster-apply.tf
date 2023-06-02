@@ -26,12 +26,12 @@ resource "azurerm_virtual_network" "consul-cluster1" {
   resource_group_name = var.rg
 }
 
-#resource "azurerm_subnet" "consul-cluster1" {
-#  name                 = "subnet-${var.name}"
-#  resource_group_name  = "${var.rg}"
-#  virtual_network_name = "network-${var.name}"
-#  address_prefixes     = ["10.0.1.0/24"]
-#}
+resource "azurerm_subnet" "consul-cluster1" {
+  name                 = "lan-${var.name}"
+  resource_group_name  = var.rg
+  virtual_network_name = "network-${var.name}"
+  address_prefixes     = ["10.0.1.0/24"]
+}
 
 #resource "azurerm_network_interface" "consul-cluster1" {
 #  count               = 3
