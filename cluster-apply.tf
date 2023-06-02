@@ -51,7 +51,7 @@ resource "azurerm_linux_virtual_machine" "consul-cluster1" {
   name                = "${var.name}${count.index}"
   resource_group_name = "${var.rg}"
   location            = "${var.location}"
-  size                = "Standard_F2"
+  size                = "Standard_DS1"
   admin_username      = "${var.ssh_user}"
   network_interface_ids = [azurerm_network_interface.consul-cluster1[count.index].id]
 
@@ -68,7 +68,7 @@ resource "azurerm_linux_virtual_machine" "consul-cluster1" {
   source_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
-    sku       = "16.04-LTS"
+    sku       = "22.04-LTS"
     version   = "latest"
   }
 }
