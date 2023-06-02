@@ -5,7 +5,7 @@ resource "azurerm_network_interface" "consul-cluster1" {
 
   ip_configuration {
     name                          = "internal-network-${var.name}"
-    subnet_id                     = azurerm_subnet.consul-cluster1.id
+    subnet_id                     = "azurerm_subnet.${var.name}.id"
     private_ip_address_allocation = "Dynamic"
   }
 }
