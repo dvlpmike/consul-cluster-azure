@@ -6,7 +6,7 @@ resource "azurerm_linux_virtual_machine" "consul-cluster1" {
   size                = "Standard_F2"
   admin_username      = "${var.ssh_user}"
   network_interface_ids = [
-    azurerm_network_interface.consul-cluster1.id,
+    [azurerm_network_interface.consul-cluster1[count.index].id]
   ]
 
   admin_ssh_key {
