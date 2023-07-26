@@ -71,4 +71,4 @@ resource "azurerm_linux_virtual_machine" "consul-cluster1" {
     sku       = "18.04-LTS"
     version   = "latest"
   }
-}
+} 
