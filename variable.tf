@@ -5,7 +5,7 @@ variable "name" {
 
 variable "rg" {
   type = string
-  default = "rg-consul-cluster1"
+  default = "consul-cluster-azure"
 }
 
 variable "location" {
