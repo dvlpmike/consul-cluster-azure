@@ -56,6 +56,19 @@ resource "azurerm_lb_backend_address_pool" "consul-cluster-azure" {
   name            = "BackEndAddressPool"
 }
 
+resource "azurerm_network_interface" "consul-cluster-azure" {
+  count               = 3
+  name                = "nic-${var.name}${count.index}"
+  location            = var.location
+  resource_group_name = var.rg
+
+  ip_configuration {
+    name                          = "internal-network-${var.name}"
+    subnet_id                     = azurerm_subnet.consul-cluster-azure.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
+
 resource "azurerm_linux_virtual_machine" "consul-cluster-azure" {
   count               = 3
   name                = "${var.name}${count.index}"
