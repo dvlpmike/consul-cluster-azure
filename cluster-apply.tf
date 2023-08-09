@@ -83,15 +83,6 @@ resource "azurerm_linux_virtual_machine" "consul-cluster-azure" {
     public_key = var.public_key
   }
 
-  os_disk {
-    caching              = "ReadWrite"
-    storage_account_type = "Standard_LRS"
-  }
-
-  os_profile {
-    computer_name = "${var.name}${count.index}"
-  }
-
   source_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
