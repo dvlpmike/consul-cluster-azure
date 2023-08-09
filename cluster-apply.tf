@@ -29,7 +29,7 @@ resource "azurerm_virtual_network" "consul-cluster1" {
 resource "azurerm_subnet" "consul-cluster1" {
   name                 = "lan-${var.name}"
   resource_group_name  = var.rg
-  virtual_network_name = "network-${var.name}"
+  virtual_network_name = azurerm_virtual_network.consul-cluster1.name
   address_prefixes     = ["10.0.1.0/24"]
 }
 
