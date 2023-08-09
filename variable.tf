@@ -7,7 +7,7 @@ variable "rg" {
 variable "location" {
   description = "Location for resources"
   type        = string
-  default     = "East US"
+  default     = "centralus"
 }
 
 variable "name" {
