@@ -1,5 +1,5 @@
 # Terraform Consul Cluster on Azure
-![Architecture](img/architecture.jpg)
+![Architecture](img/architecture.png)
 ## Prerequisites
 Run below commands on Azure:
 ```sh
