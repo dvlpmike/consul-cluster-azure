@@ -15,8 +15,8 @@ provider "azurerm" {
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_resource_group" "consul-cluster-azure" {
-  name     = "${var.rg}"
-  location = "${var.location}"
+  name     = var.rg
+  location = var.location
 }
 
 resource "azurerm_virtual_network" "consul-cluster-azure" {
@@ -33,17 +33,27 @@ resource "azurerm_subnet" "consul-cluster-azure" {
   address_prefixes     = ["10.0.1.0/24"]
 }
 
-resource "azurerm_network_interface" "consul-cluster-azure" {
-  count               = 3
-  name                = "nic-${var.name}${count.index}"
+resource "azurerm_public_ip" "consul-cluster-azure" {
+  name                = "publicIPForLB"
+  location            = var.location
+  resource_group_name = var.rg
+  allocation_method   = "Static"
+}
+
+resource "azurerm_lb" "consul-cluster-azure" {
+  name                = "loadBalancer"
   location            = var.location
   resource_group_name = var.rg
 
-  ip_configuration {
-    name                          = "internal-network-${var.name}"
-    subnet_id                     = azurerm_subnet.consul-cluster-azure.id
-    private_ip_address_allocation = "Dynamic"
+  frontend_ip_configuration {
+    name                 = "publicIPAddress"
+    public_ip_address_id = azurerm_public_ip.consul-cluster-azure.id
   }
+}
+
+resource "azurerm_lb_backend_address_pool" "consul-cluster-azure" {
+  loadbalancer_id = azurerm_lb.consul-cluster-azure.id
+  name            = "BackEndAddressPool"
 }
 
 resource "azurerm_linux_virtual_machine" "consul-cluster-azure" {
@@ -65,10 +75,14 @@ resource "azurerm_linux_virtual_machine" "consul-cluster-azure" {
     storage_account_type = "Standard_LRS"
   }
 
+  os_profile {
+    computer_name = "${var.name}${count.index}"
+  }
+
   source_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
     sku       = "18.04-LTS"
     version   = "latest"
   }
-} 
+}
