@@ -1,18 +1,30 @@
-variable "name" {
-  type = string
-  default = "consul-cluster-azure"
-}
-
 variable "rg" {
-  type = string
-  default = "consul-cluster-azure"
+  description = "Resource Group Name"
+  type        = string
+  default     = "consul-cluster-azure"
 }
 
 variable "location" {
-  type = string
-  default = "centralus"
+  description = "Location for resources"
+  type        = string
+  default     = "centralus"
 }
 
-variable "public_key" {}
+variable "name" {
+  description = "Base name for resources"
+  type        = string
+  default     = "consul"
+}
 
-variable "ssh_user" {}
+variable "ssh_user" {
+  description = "SSH username for VMs"
+  type        = string
+  default     = "admin"
+}
+
+variable "public_key" {
+  description = "SSH public key"
+  type        = string
+  default     = ""
+}
+
