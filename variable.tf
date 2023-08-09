@@ -1,6 +1,6 @@
 variable "name" {
   type = string
-  default = "consul-cluster1"
+  default = "consul-cluster-azure"
 }
 
 variable "rg" {
