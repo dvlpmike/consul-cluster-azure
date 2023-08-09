@@ -1,10 +1,5 @@
 name: Terraform
 on:
-  push:
-    branches:
-      - fix-terraform
-    paths-ignore:
-      - "**.md"
   workflow_dispatch:
 
 permissions:
