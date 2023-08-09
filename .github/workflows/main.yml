@@ -37,7 +37,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
-        run: terraform plan -input=false -lock=false
+        run: terraform plan -input=false
         env:
           TF_VAR_public_key: ${{ secrets.AZURE_PUBLIC_KEY }}
           TF_VAR_ssh_user: ${{ secrets.AZURE_SSH_USER }}
