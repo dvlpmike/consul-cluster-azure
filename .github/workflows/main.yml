@@ -2,7 +2,7 @@ name: Terraform
 on:
   push:
     branches:
-      - main
+      - fix-terraform
     paths-ignore:
       - "**.md"
   workflow_dispatch:
