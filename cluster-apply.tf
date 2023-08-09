@@ -46,6 +46,29 @@ resource "azurerm_network_interface" "consul-cluster-azure" {
   }
 }
 
+resource "azurerm_public_ip" "consul-cluster-azure" {
+  name                = "publicIPForLB"
+  location            = var.location
+  resource_group_name = var.rg
+  allocation_method   = "Static"
+}
+
+resource "azurerm_lb" "consul-cluster-azure" {
+  name                = "loadBalancer"
+  location            = var.location
+  resource_group_name = var.rg
+
+  frontend_ip_configuration {
+    name                 = "publicIPAddress"
+    public_ip_address_id = azurerm_public_ip.consul-cluster-azure.id
+  }
+}
+
+resource "azurerm_lb_backend_address_pool" "consul-cluster-azure" {
+  loadbalancer_id = azurerm_lb.consul-cluster-azure.id
+  name            = "BackEndAddressPool"
+}
+
 resource "azurerm_linux_virtual_machine" "consul-cluster-azure" {
   count               = 3
   name                = "${var.name}${count.index}"
