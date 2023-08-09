@@ -1,7 +1,7 @@
 variable "rg" {
   description = "Resource Group Name"
   type        = string
-  default     = "rg-consul-cluster"
+  default     = "consul-cluster-azure"
 }
 
 variable "location" {
