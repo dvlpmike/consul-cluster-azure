@@ -118,14 +118,14 @@ resource "azurerm_public_ip" "bastion" {
   sku                 = "Standard"
 }
 
-resource "azurerm_bastion_host" "consul-cluster-azure" {
+resource "azurerm_bastion_host" "bastion" {
   name                = "examplebastion"
   location            = var.location
   resource_group_name = var.rg
 
   ip_configuration {
     name                 = "configuration"
-    subnet_id            = azurerm_subnet.consul-cluster-azure.id
+    subnet_id            = azurerm_subnet.bastion.id
     public_ip_address_id = azurerm_public_ip.bastion.id
   }
 }
