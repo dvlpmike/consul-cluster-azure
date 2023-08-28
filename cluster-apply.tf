@@ -96,18 +96,11 @@ resource "azurerm_linux_virtual_machine" "consul-cluster-azure" {
   }
 }
 
-resource "azurerm_virtual_network" "bastion" {
-  name                = "bastion-vnet"
-  address_space       = ["192.168.1.0/24"]
-  location            = var.location
-  resource_group_name = var.rg
-}
-
 resource "azurerm_subnet" "bastion" {
   name                 = "AzureBastionSubnet"
   resource_group_name  = var.rg
-  virtual_network_name = azurerm_virtual_network.bastion.name
-  address_prefixes     = ["192.168.1.224/27"]
+  virtual_network_name = azurerm_virtual_network.consul-cluster-azure.name
+  address_prefixes     = ["10.0.1.224/27"]
 }
 
 resource "azurerm_public_ip" "bastion" {
