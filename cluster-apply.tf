@@ -95,3 +95,23 @@ resource "azurerm_linux_virtual_machine" "consul-cluster-azure" {
     version   = "latest"
   }
 }
+
+resource "azurerm_public_ip" "bastion" {
+  name                = "publicIPForBastion"
+  location            = var.location
+  resource_group_name = var.rg
+  allocation_method   = "Static"
+  sku                 = "Standard"
+}
+
+resource "azurerm_bastion_host" "consul-cluster-azure" {
+  name                = "examplebastion"
+  location            = var.location
+  resource_group_name = var.rg
+
+  ip_configuration {
+    name                 = "configuration"
+    subnet_id            = azurerm_subnet.consul-cluster-azure.id
+    public_ip_address_id = azurerm_public_ip.bastion.id
+  }
+}
