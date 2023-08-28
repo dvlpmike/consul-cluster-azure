@@ -112,7 +112,7 @@ resource "azurerm_public_ip" "bastion" {
 }
 
 resource "azurerm_bastion_host" "bastion" {
-  name                = "examplebastion"
+  name                = "consul-cluster-bastion"
   location            = var.location
   resource_group_name = var.rg
 
