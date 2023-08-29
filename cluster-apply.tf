@@ -20,6 +20,7 @@ resource "azurerm_resource_group" "consul-cluster-azure" {
 }
 
 resource "azurerm_virtual_network" "consul-cluster-azure" {
+  depends_on = [azurerm_resource_group.consul-cluster-azure]
   name                = "network-${var.name}"
   address_space       = ["10.0.0.0/16"]
   location            = var.location
@@ -34,6 +35,7 @@ resource "azurerm_subnet" "consul-cluster-azure" {
 }
 
 resource "azurerm_public_ip" "consul-cluster-azure" {
+  depends_on = [azurerm_resource_group.consul-cluster-azure]
   name                = "publicIPForLB"
   location            = var.location
   resource_group_name = var.rg
@@ -104,6 +106,7 @@ resource "azurerm_subnet" "bastion" {
 }
 
 resource "azurerm_public_ip" "bastion" {
+  depends_on = [azurerm_resource_group.consul-cluster-azure]
   name                = "publicIPForBastion"
   location            = var.location
   resource_group_name = var.rg

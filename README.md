@@ -18,6 +18,12 @@ az ad sp create-for-rbac --name dvlpmike-consul-cluster
 # Add role for app
 az role assignment create --assignee <service-principal-id> --role "Contributor"
 ```
+
+Create ssh pair key
+```sh
+ssh-keygen -t rsa -b 4096
+```
+
 Add secretes do repo:
 - `AZURE_CLIENT_ID`
 - `AZURE_SUBSCRIPTION_ID`
