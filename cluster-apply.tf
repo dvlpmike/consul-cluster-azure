@@ -20,6 +20,7 @@ resource "azurerm_resource_group" "consul-cluster-azure" {
 }
 
 resource "azurerm_virtual_network" "consul-cluster-azure" {
+  depends_on          = [azurerm_resource_group.consul-cluster-azure]
   name                = "network-${var.name}"
   address_space       = ["10.0.0.0/16"]
   location            = var.location
